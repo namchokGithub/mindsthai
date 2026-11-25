@@ -3,6 +3,7 @@ import { defineConfig } from "tsdown";
 export default defineConfig({
   entry: {
     index: "src/index.ts",
+    "analysis/index": "src/analysis/index.ts",
     "normalization/index": "src/normalization/index.ts",
     "numbers/index": "src/numbers/index.ts",
     "romanization/index": "src/romanization/index.ts",

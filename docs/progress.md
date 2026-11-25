@@ -101,9 +101,11 @@ Phase 7 verification: focused number tests and typecheck passed. Package export 
 
 ## Phase 8 — P2: Text analysis
 
-- [ ] Define and approve `analyzeThai(text, options?)`, its result type, measurements, and how it composes existing APIs; choose its public export path.
-- [ ] Add focused tests for Thai, mixed scripts, punctuation, empty and invalid input, and consistency with the underlying APIs; run the new test file before and after implementation.
-- [ ] Document exactly what each result measures and any inherited segmentation or runtime limitations.
+- [x] Define and approve `analyzeThai(text: string): ThaiTextAnalysis` with Unicode and Thai-block code point counts and existing segmentation results; configure root and `./analysis` exports.
+- [x] Add focused tests for Thai, mixed scripts, punctuation, empty and invalid input, and consistency with the underlying APIs; run the new test file before and after implementation.
+- [x] Document what each result measures and inherited segmentation and runtime limitations.
+
+Phase 8 verification: focused analysis tests and typecheck passed. Package export checks were extended but require a new build and were not run; the existing build does not contain the new exports.
 
 ## Phase 9 — P3: Dictionary
 

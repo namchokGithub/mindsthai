@@ -97,10 +97,29 @@ readThaiNumber(21); // "ยี่สิบเอ็ด"
 
 The functions are also exported from the root. The new exports have not yet been checked in a built, installed package.
 
+## Text analysis
+
+`analyzeThai(text: string): ThaiTextAnalysis` returns:
+
+- `codePointCount`: Unicode code points in the entire input, including whitespace, punctuation, and combining marks. This is not necessarily the number of visible characters.
+- `thaiBlockCodePointCount`: code points in the Unicode Thai block `U+0E00–U+0E7F`, including Thai digits and marks.
+- `wordSegments` and `sentenceSegments`: results from `segmentWords` and `segmentSentences`. These retain whitespace and punctuation and are not guaranteed linguistic word or sentence counts.
+
+Empty input returns zero counts and empty arrays; non-string input throws `TypeError`. Non-empty input requires `Intl.Segmenter`, and segment boundaries depend on runtime locale and ICU data.
+
+```ts
+import { analyzeThai } from "@mindskit/thai/analysis";
+
+const result = analyzeThai("ไทย");
+// { codePointCount: 3, thaiBlockCodePointCount: 3, wordSegments: ["ไทย"], sentenceSegments: ["ไทย"] }
+```
+
+The function and `ThaiTextAnalysis` type are also exported from the root. The new exports have not yet been checked in a built, installed package.
+
 ## Planned capabilities
 
 - **P1:** NFC normalization, word and sentence segmentation, and a limited romanization prototype are implemented.
-- **P2:** a limited syllable segmentation prototype, Thai digit conversion, and number reading are implemented; text analysis is planned.
+- **P2:** a limited syllable segmentation prototype, Thai digit conversion, number reading, and text analysis are implemented.
 - **P3:** spell checking, dictionary lookup, and custom pronunciation or romanization mappings.
 
 See [the roadmap](docs/roadmap.md) and [progress plan](docs/progress.md). General Thai romanization requires linguistic context beyond the prototype's small lookup table.

@@ -11,3 +11,5 @@ Thai language behavior must be documented and backed by reviewable fixtures. The
 Syllable segmentation builds on word segmentation and uses a small table of written splits. It preserves unknown segments without classifying them, so it is not a general-purpose syllable analyzer.
 
 The numbers module converts ASCII and Thai digits without changing other text and reads Thai cardinal integers within a documented range. It is exposed through the root and `./numbers`.
+
+The analysis module counts Unicode and Thai-block code points and reuses word and sentence segmentation, inheriting their runtime and linguistic limitations.
