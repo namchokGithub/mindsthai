@@ -15,3 +15,5 @@ The numbers module converts ASCII and Thai digits without changing other text an
 The analysis module counts Unicode and Thai-block code points and reuses word and sentence segmentation, inheriting their runtime and linguistic limitations.
 
 The dictionary prototype uses a small locally authored table and per-call custom entries. It matches NFC-normalized whole queries and does not persist entries or perform network requests.
+
+The spell-checking prototype checks Thai word segments against that dictionary and reports UTF-16 offsets and known/unknown status. Unknown is not a spelling verdict, and no suggestions are provided.

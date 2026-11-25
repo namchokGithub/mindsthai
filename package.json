@@ -40,6 +40,10 @@
     "./segmentation": {
       "types": "./dist/segmentation/index.d.mts",
       "default": "./dist/segmentation/index.mjs"
+    },
+    "./spell-checking": {
+      "types": "./dist/spell-checking/index.d.mts",
+      "default": "./dist/spell-checking/index.mjs"
     }
   },
   "scripts": {

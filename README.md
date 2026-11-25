@@ -133,11 +133,26 @@ Each custom entry has non-empty `word` and `meaning` strings. Custom entries app
 
 The function and `DictionaryEntry` and `DictionaryOptions` types are also exported from the root. The new exports have not yet been checked in a built, installed package.
 
+## Spell-checking prototype
+
+`checkSpelling(text: string, options?: SpellingOptions): SpellingResult[]` uses word segmentation and reports segments containing a Thai consonant (`ก–ฮ`). Other segments, including Latin text, digits alone, whitespace, and punctuation, are not reported. Each result contains the original `word`, UTF-16 `start` and exclusive `end` offsets, and a `status` of `"known"` or `"unknown"`; `text.slice(start, end)` returns the reported segment.
+
+`known` means an NFC-normalized match exists in the dictionary. `unknown` means no match was found; it does **not** establish that a word is misspelled. The built-in dictionary has only two words, so coverage is very limited. This prototype provides no spelling suggestions. Segment boundaries depend on `Intl.Segmenter`, runtime locale, and ICU data.
+
+```ts
+import { checkSpelling } from "@mindskit/thai/spell-checking";
+
+checkSpelling("แมว", { entries: [{ word: "แมว", meaning: "cat" }] });
+// [{ word: "แมว", start: 0, end: 3, status: "known" }]
+```
+
+Custom entries follow the same validation and per-call behavior as `lookupWord`. Empty input returns `[]`; invalid arguments throw `TypeError`. Non-empty input requires `Intl.Segmenter`. The function and `SpellingOptions` and `SpellingResult` types are also exported from the root. The new exports have not yet been checked in a built, installed package.
+
 ## Planned capabilities
 
 - **P1:** NFC normalization, word and sentence segmentation, and a limited romanization prototype are implemented.
 - **P2:** a limited syllable segmentation prototype, Thai digit conversion, number reading, and text analysis are implemented.
-- **P3:** a limited dictionary prototype is implemented; spell checking and custom pronunciation or romanization mappings are planned.
+- **P3:** limited dictionary and spell-checking prototypes are implemented; custom pronunciation or romanization mappings are planned.
 
 See [the roadmap](docs/roadmap.md) and [progress plan](docs/progress.md). General Thai romanization requires linguistic context beyond the prototype's small lookup table.
 

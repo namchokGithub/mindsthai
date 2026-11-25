@@ -9,6 +9,7 @@ export default defineConfig({
     "numbers/index": "src/numbers/index.ts",
     "romanization/index": "src/romanization/index.ts",
     "segmentation/index": "src/segmentation/index.ts",
+    "spell-checking/index": "src/spell-checking/index.ts",
   },
   format: "esm",
   dts: true,

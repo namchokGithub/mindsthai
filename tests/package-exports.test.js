@@ -31,7 +31,7 @@ describe("installed package", () => {
   });
 
   it("includes distribution files and excludes development files", () => {
-    for (const entry of ["index", "analysis/index", "dictionary/index", "normalization/index", "numbers/index", "romanization/index", "segmentation/index"]) {
+    for (const entry of ["index", "analysis/index", "dictionary/index", "normalization/index", "numbers/index", "romanization/index", "segmentation/index", "spell-checking/index"]) {
       expect(packedFiles).toContain(`dist/${entry}.mjs`);
       expect(packedFiles).toContain(`dist/${entry}.d.mts`);
     }
@@ -41,9 +41,10 @@ describe("installed package", () => {
   it("resolves public JavaScript exports while blocking internal paths", () => {
     const source = `
       import assert from "node:assert/strict";
-      import { analyzeThai, lookupWord, normalizeThai, romanize, segmentWords, segmentSentences } from "@mindskit/thai";
+      import { analyzeThai, checkSpelling, lookupWord, normalizeThai, romanize, segmentWords, segmentSentences } from "@mindskit/thai";
       import { analyzeThai as analyze } from "@mindskit/thai/analysis";
       import { lookupWord as lookup } from "@mindskit/thai/dictionary";
+      import { checkSpelling as check } from "@mindskit/thai/spell-checking";
       import { normalizeThai as normalize } from "@mindskit/thai/normalization";
       import { toThaiDigits, toArabicDigits, readThaiNumber } from "@mindskit/thai/numbers";
       import { romanize as roman } from "@mindskit/thai/romanization";
@@ -51,6 +52,7 @@ describe("installed package", () => {
       assert.equal(normalize("cafe\\u0301"), normalizeThai("cafe\\u0301"));
       assert.deepEqual(analyze("ไทย"), analyzeThai("ไทย"));
       assert.deepEqual(lookup("มะนาว"), lookupWord("มะนาว"));
+      assert.deepEqual(check("มะนาว"), checkSpelling("มะนาว"));
       assert.equal(toThaiDigits("123"), "๑๒๓");
       assert.equal(toArabicDigits("๑๒๓"), "123");
       assert.equal(readThaiNumber(21), "ยี่สิบเอ็ด");
@@ -68,6 +70,7 @@ describe("installed package", () => {
       import { normalizeThai, romanize, segmentWords, segmentSentences } from "@mindskit/thai";
       import { analyzeThai, type ThaiTextAnalysis } from "@mindskit/thai/analysis";
       import { lookupWord, type DictionaryEntry, type DictionaryOptions } from "@mindskit/thai/dictionary";
+      import { checkSpelling, type SpellingOptions, type SpellingResult } from "@mindskit/thai/spell-checking";
       import { normalizeThai as normalize } from "@mindskit/thai/normalization";
       import { toThaiDigits, toArabicDigits, readThaiNumber } from "@mindskit/thai/numbers";
       import { romanize as roman, type RomanizationOptions } from "@mindskit/thai/romanization";
@@ -78,6 +81,9 @@ describe("installed package", () => {
       const entry: DictionaryEntry = { word: "มะนาว", meaning: "lime" };
       const dictionaryOptions: DictionaryOptions = { entries: [entry] };
       lookupWord("มะนาว", dictionaryOptions);
+      const spellingOptions: SpellingOptions = dictionaryOptions;
+      const spellingResults: SpellingResult[] = checkSpelling("มะนาว", spellingOptions);
+      void spellingResults;
       const outputs: string[] = [normalizeThai(""), normalize(""), toThaiDigits(""), toArabicDigits(""), readThaiNumber(0), romanize("", options), roman("", options), ...segmentWords(""), ...segmentSentences(""), ...words(""), ...sentences("")];
       void outputs;
     `;

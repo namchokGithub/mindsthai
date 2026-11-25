@@ -118,9 +118,11 @@ Phase 9 verification: focused dictionary tests and typecheck passed. Package exp
 
 ## Phase 10 — P3: Spell checking
 
-- [ ] Define and approve `checkSpelling(text, options?)`, its result type, token boundaries, unknown-word behavior, suggestion ordering and limits, and custom dictionary integration.
-- [ ] Add independently reviewed fixtures for correct, misspelled, ambiguous, unknown, and mixed-script text; test deterministic suggestions, punctuation, empty and invalid inputs, and custom entries.
-- [ ] Run the new focused test file before and after implementing the approved strategy. Document that dictionary coverage and suggestions do not guarantee linguistic correctness.
+- [x] Define and approve `checkSpelling(text, options?)` with Thai-consonant word segments, UTF-16 offsets, dictionary membership status, custom entries, and no suggestions.
+- [x] Add focused fixtures for known and unknown words, mixed scripts, punctuation, empty and invalid inputs, offsets, and custom entries. Unknown is not classified as misspelled.
+- [x] Run the new focused test file before and after implementation and document limited dictionary coverage and the absence of suggestions.
+
+Phase 10 verification: focused spell-checking tests and typecheck passed. Package export checks were extended but require a new build and were not run; the existing build does not contain the new exports.
 
 ## Phase 11 — P3: Romanization and pronunciation overrides
 
