@@ -1,10 +1,10 @@
 # Roadmap
 
-These are planned capabilities, not available APIs. Signatures and behavior remain subject to review.
+Unless marked implemented, these are planned capabilities, not available APIs. Planned signatures and behavior remain subject to review.
 
 ## P1 — Foundation and core processing
 
-- `normalizeThai(text, options?)`: define and test Unicode, Thai mark, and whitespace handling.
+- `normalizeThai(text)`: implemented using Unicode NFC without additional Thai-specific rewriting; see the [README](../README.md#normalization) for behavior.
 - `segmentWords(text, options?)` and `segmentSentences(text, options?)`: independently specified boundary strategies, including unsupported-runtime behavior.
 - `romanize(text, { style: 'rtgs' | 'casual' })`: either an explicitly limited, tested prototype or a deferred milestone. Casual romanization is informal, not a formal standard.
 

@@ -8,6 +8,16 @@
   "packageManager": "pnpm@11.24.0",
   "engines": { "node": ">=24" },
   "files": ["dist"],
+  "exports": {
+    ".": {
+      "types": "./dist/index.d.ts",
+      "default": "./dist/index.js"
+    },
+    "./normalization": {
+      "types": "./dist/normalization/index.d.ts",
+      "default": "./dist/normalization/index.js"
+    }
+  },
   "scripts": {
     "typecheck": "tsc --noEmit",
     "test": "vitest run --passWithNoTests",

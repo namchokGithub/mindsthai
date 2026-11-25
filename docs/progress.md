@@ -24,7 +24,7 @@
 
 - [x] Proceed in stages: foundation first; later phases require separate approval.
 - [x] Use Node.js 24 as the minimum and Node.js 26 LTS in CI; use compatible stable tooling.
-- [ ] Define normalization rules, including Unicode form, Thai mark ordering, whitespace, invalid arguments, and non-Thai preservation.
+- [x] Normalize the entire input to NFC; do not apply additional Thai mark ordering, whitespace changes, or spelling corrections. Return empty input unchanged and throw `TypeError` for non-string input.
 - [ ] Choose segmentation return types and treatment of whitespace and punctuation; decide what happens when `Intl.Segmenter` is unavailable and document ICU variability. Define a separate sentence strategy.
 - [ ] Decide whether romanization remains a documented pending milestone or ships as a limited prototype; if implemented, approve its supported vocabulary, unknown-text fallback, and RTGS/casual distinctions using independently verified fixtures.
 - [ ] Before P2, approve syllable segmentation and number-reading behavior, accepted number formats and range, digit conversion rules, and the shape of analysis results.
@@ -54,9 +54,9 @@ Foundation verification: dependency installation and `pnpm typecheck` succeeded 
 
 ## Phase 2 — Normalization
 
-- [ ] After behavior approval, define the options and return type for `normalizeThai(text, options?)` and publish it from the root and `./normalization`.
-- [ ] Add focused tests for composed/decomposed Unicode, approved ordering and whitespace rules, mixed scripts, empty and invalid inputs, and idempotence; run the changed test file and confirm failures before implementation.
-- [ ] Implement the smallest behavior supported by those tests and rerun the changed test file. Document exact guarantees and limitations.
+- [x] Define `normalizeThai(text: string): string` without options and configure root and `./normalization` exports.
+- [x] Add focused tests for composed/decomposed Unicode, Thai marks, whitespace, mixed scripts, empty and invalid inputs, and idempotence; run the changed test file before implementation.
+- [x] Implement NFC behavior and document its guarantees and limitations. The focused tests and typecheck pass; a build and installed-package export check remain unverified under the current check restrictions.
 
 ## Phase 3 — Segmentation
 
