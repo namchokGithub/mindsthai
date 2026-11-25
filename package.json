@@ -1,29 +1,33 @@
 {
   "name": "@mindskit/thai",
-  "version": "0.0.0",
+  "version": "0.0.1",
   "private": true,
   "description": "A lightweight TypeScript toolkit for Thai language processing, including romanization, text segmentation, normalization, and more.",
   "license": "MIT",
   "type": "module",
   "packageManager": "pnpm@11.24.0",
-  "engines": { "node": ">=24" },
-  "files": ["dist"],
+  "engines": {
+    "node": ">=24"
+  },
+  "files": [
+    "dist"
+  ],
   "exports": {
     ".": {
-      "types": "./dist/index.d.ts",
-      "default": "./dist/index.js"
+      "types": "./dist/index.d.mts",
+      "default": "./dist/index.mjs"
     },
     "./normalization": {
-      "types": "./dist/normalization/index.d.ts",
-      "default": "./dist/normalization/index.js"
+      "types": "./dist/normalization/index.d.mts",
+      "default": "./dist/normalization/index.mjs"
     },
     "./romanization": {
-      "types": "./dist/romanization/index.d.ts",
-      "default": "./dist/romanization/index.js"
+      "types": "./dist/romanization/index.d.mts",
+      "default": "./dist/romanization/index.mjs"
     },
     "./segmentation": {
-      "types": "./dist/segmentation/index.d.ts",
-      "default": "./dist/segmentation/index.js"
+      "types": "./dist/segmentation/index.d.mts",
+      "default": "./dist/segmentation/index.mjs"
     }
   },
   "scripts": {

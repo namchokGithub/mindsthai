@@ -29,7 +29,7 @@
 - [x] Ship a limited three-word romanization prototype with `rtgs` and `casual` readings; preserve unknown segments and existing spacing, and document the source and limitations.
 - [ ] Before P2, approve syllable segmentation and number-reading behavior, accepted number formats and range, digit conversion rules, and the shape of analysis results.
 - [ ] Before P3, approve dictionary and spell-checking data sources and licensing, custom entry and override formats, ambiguity handling, suggestions, and any effect on package size or runtime resources.
-- [ ] Explicitly authorize any final build, full test run, and package dry-run needed to verify distribution; these conflict with the current local check restrictions unless requested.
+- [x] Authorize the Phase 5 build, full test run, and package dry-run for distribution verification.
 
 ## Planned files
 
@@ -73,10 +73,12 @@ Foundation verification: dependency installation and `pnpm typecheck` succeeded 
 
 ## Phase 5 — Distribution and handoff
 
-- [ ] Add focused checks for root and subpath exports and declaration paths, including an installed-package consumer when a build and package check are authorized.
-- [ ] Complete the README using only implemented APIs and reliable examples; document installation availability, environments, linguistic limitations, development commands, roadmap, and license.
-- [ ] If explicitly authorized, run typecheck, the full test run, build, and a package dry-run/consumer check once; report actual results and any skipped checks. Otherwise report that publish readiness is unverified.
-- [ ] Update this file with completed tasks, decisions, unresolved limitations, and the next recommended task. Suggest a Conventional Commit based on staged changes if present, otherwise unstaged changes.
+- [x] Add installed-package checks for public JavaScript exports, declarations, package contents, and blocked internal paths.
+- [x] Update the README with implemented APIs, installation availability, environments, linguistic limitations, development commands, roadmap, and license.
+- [x] Run typecheck, the full test run, build, and package dry-run/consumer check with explicit approval.
+- [x] Record results, limitations, and the next recommended task.
+
+Phase 5 verification on Node.js 26.7.0: `pnpm typecheck` passed; `pnpm build` passed with a TypeScript 7.0 generator deprecation warning; `pnpm test` passed 32 tests in 4 files; `npm pack --dry-run` listed 11 files. The installed-package test checks runtime and TypeScript imports for all four entry points. Node.js 24, browsers, and CI have not been exercised. The package remains private at version 0.0.0, and npm scope ownership must be confirmed before publication. Next: review Phase 6 syllable segmentation behavior before implementation.
 
 ## Phase 6 — P2: Syllable segmentation
 

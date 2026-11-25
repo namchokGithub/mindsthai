@@ -4,6 +4,8 @@ MindsThai is a planned lightweight, framework-independent TypeScript toolkit for
 
 The project is in early development and has not been published. Do not install `@mindskit/thai` until it has been published. There are no runtime network requests or production dependencies.
 
+After publication, install it with `pnpm add @mindskit/thai`. The package is currently private and not ready for publication.
+
 ## Normalization
 
 `normalizeThai(text: string): string` applies Unicode NFC to the entire input, including non-Thai text. It preserves whitespace and punctuation and makes no additional Thai-specific mark ordering or spelling corrections. Empty input returns an empty string; non-string input throws `TypeError`. Unicode normalization may change the representation of non-Thai text while preserving canonical equivalence.
@@ -17,7 +19,7 @@ import { normalizeThai } from "@mindskit/thai";
 normalizeThai("สวัสดี cafe\u0301"); // "สวัสดี café"
 ```
 
-Package builds and installed imports have not yet been verified.
+The root and normalization imports are covered by an installed-package check.
 
 ## Segmentation
 
@@ -33,7 +35,7 @@ const words = segmentWords("ฉันชอบเขียนโปรแกร�
 const sentences = segmentSentences("สวัสดีครับ วันนี้อากาศดี");
 ```
 
-These imports are available after publication; built-package imports have not yet been verified.
+These imports are available after publication and are covered by an installed-package check.
 
 ## Romanization prototype
 
@@ -56,7 +58,7 @@ import { romanize } from "@mindskit/thai";
 romanize("สวัสดี ค่ะ", { style: "casual" }); // "sawasdee kha"
 ```
 
-These imports are available after publication; built-package imports have not yet been verified.
+These imports are available after publication and are covered by an installed-package check.
 
 ## Planned capabilities
 
@@ -73,12 +75,12 @@ Use Node.js 24 or newer and pnpm 11.24.0. CI uses Node.js 26.
 ```sh
 pnpm install --frozen-lockfile
 pnpm typecheck
+pnpm build
 pnpm test
 pnpm test:watch
-pnpm build
 ```
 
-The runtime is intended to support browsers and Node.js; supported environments will be specified and verified as APIs are implemented. See [architecture](docs/architecture.md) for the intended package layout.
+Build before running the full test suite: the package export tests install the built tarball in a temporary consumer. Rebuild after changes that affect the distributed output. The runtime is intended to support browsers and Node.js; installed-package checks have run on Node.js 26, while Node.js 24 and browser compatibility remain unverified. See [architecture](docs/architecture.md) for the package layout.
 
 ## License
 
