@@ -21,6 +21,10 @@
       "types": "./dist/normalization/index.d.mts",
       "default": "./dist/normalization/index.mjs"
     },
+    "./numbers": {
+      "types": "./dist/numbers/index.d.mts",
+      "default": "./dist/numbers/index.mjs"
+    },
     "./romanization": {
       "types": "./dist/romanization/index.d.mts",
       "default": "./dist/romanization/index.mjs"

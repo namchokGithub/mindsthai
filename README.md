@@ -81,10 +81,26 @@ romanize("สวัสดี ค่ะ", { style: "casual" }); // "sawasdee kha"
 
 These imports are available after publication and are covered by an installed-package check.
 
+## Thai numbers
+
+`toThaiDigits(text: string): string` converts ASCII digits `0–9` to Thai digits `๐–๙`. `toArabicDigits(text: string): string` converts in the opposite direction. Both preserve all other characters, including digits already in the target script; empty input returns an empty string. Non-string input throws `TypeError`.
+
+`readThaiNumber(value: number): string` reads integer cardinal numbers from 0 to 999,999. For example, 0 is `ศูนย์`, 21 is `ยี่สิบเอ็ด`, and 101 is `หนึ่งร้อยเอ็ด`. It throws `TypeError` for non-number input and `RangeError` for fractions, non-finite values, negative values, or numbers above 999,999. Negative zero is treated as zero. It does not round or parse strings. The reading fixtures can be checked against [this university teaching material](https://yri.mbu.ac.th/wp-content/uploads/2024/04/Fulltext-%E0%B8%97%E0%B8%AD%E0%B8%87%E0%B8%84%E0%B8%B3-%E0%B9%81%E0%B8%A5%E0%B8%B0%E0%B8%84%E0%B8%93%E0%B8%B0-14-01-67.pdf).
+
+```ts
+import { toThaiDigits, toArabicDigits, readThaiNumber } from "@mindskit/thai/numbers";
+
+toThaiDigits("123"); // "๑๒๓"
+toArabicDigits("๑๒๓"); // "123"
+readThaiNumber(21); // "ยี่สิบเอ็ด"
+```
+
+The functions are also exported from the root. The new exports have not yet been checked in a built, installed package.
+
 ## Planned capabilities
 
 - **P1:** NFC normalization, word and sentence segmentation, and a limited romanization prototype are implemented.
-- **P2:** a limited syllable segmentation prototype is implemented; Thai digit conversion, number reading, and text analysis are planned.
+- **P2:** a limited syllable segmentation prototype, Thai digit conversion, and number reading are implemented; text analysis is planned.
 - **P3:** spell checking, dictionary lookup, and custom pronunciation or romanization mappings.
 
 See [the roadmap](docs/roadmap.md) and [progress plan](docs/progress.md). General Thai romanization requires linguistic context beyond the prototype's small lookup table.

@@ -91,11 +91,13 @@ Phase 6 verification: focused syllable tests and typecheck passed. Build and ins
 
 ## Phase 7 — P2: Thai digits and number reading
 
-- [ ] Define and approve `toThaiDigits(text)` and `toArabicDigits(text)`, including mixed text, existing target digits, empty strings, and invalid inputs. Choose their public export path.
-- [ ] Add focused conversion tests for all ten digits, round trips, mixed scripts, punctuation, empty strings, and invalid inputs; run them before and after implementation.
-- [ ] Define and approve `readThaiNumber(value, options?)`, including accepted input types, supported range and precision, zero, signs, decimals, and unsupported values. Do not silently round or invent readings.
-- [ ] Add independently verified number-reading fixtures for the approved range and boundary cases; run the new focused test file before and after implementing the approved behavior.
-- [ ] Document conversion guarantees, number-reading limitations, and implemented exports.
+- [x] Approve digit conversions preserving other text, and `readThaiNumber(value: number)` for integers 0–999,999 without rounding; configure root and `./numbers` exports.
+- [x] Add focused conversion tests for all ten digits, round trips, mixed scripts, punctuation, empty strings, and invalid inputs; run them before and after implementation.
+- [x] Define and approve number input, zero, range, and error behavior; negative zero reads as zero, while negative values, fractions, and non-finite values are rejected.
+- [x] Add reviewable number-reading fixtures for the approved range and boundary cases; run the focused test file before and after implementation.
+- [x] Document conversion guarantees and number-reading limitations.
+
+Phase 7 verification: focused number tests and typecheck passed. Package export checks were extended but require a new build and were not run; the existing build does not contain the new exports.
 
 ## Phase 8 — P2: Text analysis
 

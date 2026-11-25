@@ -31,7 +31,7 @@ describe("installed package", () => {
   });
 
   it("includes distribution files and excludes development files", () => {
-    for (const entry of ["index", "normalization/index", "romanization/index", "segmentation/index"]) {
+    for (const entry of ["index", "normalization/index", "numbers/index", "romanization/index", "segmentation/index"]) {
       expect(packedFiles).toContain(`dist/${entry}.mjs`);
       expect(packedFiles).toContain(`dist/${entry}.d.mts`);
     }
@@ -43,9 +43,13 @@ describe("installed package", () => {
       import assert from "node:assert/strict";
       import { normalizeThai, romanize, segmentWords, segmentSentences } from "@mindskit/thai";
       import { normalizeThai as normalize } from "@mindskit/thai/normalization";
+      import { toThaiDigits, toArabicDigits, readThaiNumber } from "@mindskit/thai/numbers";
       import { romanize as roman } from "@mindskit/thai/romanization";
       import { segmentWords as words, segmentSentences as sentences } from "@mindskit/thai/segmentation";
       assert.equal(normalize("cafe\\u0301"), normalizeThai("cafe\\u0301"));
+      assert.equal(toThaiDigits("123"), "๑๒๓");
+      assert.equal(toArabicDigits("๑๒๓"), "123");
+      assert.equal(readThaiNumber(21), "ยี่สิบเอ็ด");
       assert.equal(roman("สวัสดี", { style: "rtgs" }), romanize("สวัสดี", { style: "rtgs" }));
       assert.deepEqual(words("ภาษาไทย"), segmentWords("ภาษาไทย"));
       assert.deepEqual(sentences("Hello. Next."), segmentSentences("Hello. Next."));
@@ -59,10 +63,11 @@ describe("installed package", () => {
     const source = `
       import { normalizeThai, romanize, segmentWords, segmentSentences } from "@mindskit/thai";
       import { normalizeThai as normalize } from "@mindskit/thai/normalization";
+      import { toThaiDigits, toArabicDigits, readThaiNumber } from "@mindskit/thai/numbers";
       import { romanize as roman, type RomanizationOptions } from "@mindskit/thai/romanization";
       import { segmentWords as words, segmentSentences as sentences } from "@mindskit/thai/segmentation";
       const options: RomanizationOptions = { style: "rtgs" };
-      const outputs: string[] = [normalizeThai(""), normalize(""), romanize("", options), roman("", options), ...segmentWords(""), ...segmentSentences(""), ...words(""), ...sentences("")];
+      const outputs: string[] = [normalizeThai(""), normalize(""), toThaiDigits(""), toArabicDigits(""), readThaiNumber(0), romanize("", options), roman("", options), ...segmentWords(""), ...segmentSentences(""), ...words(""), ...sentences("")];
       void outputs;
     `;
     writeFileSync(join(consumer, "consumer.ts"), source);

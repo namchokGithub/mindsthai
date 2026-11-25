@@ -11,8 +11,8 @@ Unless marked implemented, these are planned capabilities, not available APIs. P
 ## P2 — Additional processing
 
 - `segmentSyllables(text)`: implemented as a limited two-word prototype; see the [README](../README.md#syllable-segmentation-prototype) for coverage and limitations.
-- `toThaiDigits(text)` and `toArabicDigits(text)`.
-- `readThaiNumber(value, options?)`.
+- `toThaiDigits(text)` and `toArabicDigits(text)`: implemented for ASCII and Thai digits.
+- `readThaiNumber(value)`: implemented for integer cardinal numbers from 0 to 999,999; see the [README](../README.md#thai-numbers).
 - `analyzeThai(text, options?)`.
 
 ## P3 — Language resources
