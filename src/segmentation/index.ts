@@ -21,3 +21,13 @@ export function segmentWords(text: string): string[] {
 export function segmentSentences(text: string): string[] {
   return segment(text, "sentence");
 }
+
+const syllablesByWord = new Map<string, string[]>([
+  ["มะนาว", ["มะ", "นาว"]],
+  ["มะละกอ", ["มะ", "ละ", "กอ"]],
+]);
+
+/** Split known words into written syllables and preserve unknown segments. */
+export function segmentSyllables(text: string): string[] {
+  return segmentWords(text).flatMap((word) => syllablesByWord.get(word) ?? [word]);
+}

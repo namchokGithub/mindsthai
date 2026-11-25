@@ -82,10 +82,12 @@ Phase 5 verification on Node.js 26.7.0: `pnpm typecheck` passed; `pnpm build` pa
 
 ## Phase 6 — P2: Syllable segmentation
 
-- [ ] Define and approve `segmentSyllables(text, options?)`, its return type, boundary rules, handling of ambiguous or unknown text, and relationship to word segmentation. Choose its public export path.
-- [ ] Select independently reviewable Thai fixtures covering multi-syllable words, ambiguous boundaries, mixed scripts, punctuation, empty strings, and invalid arguments; mark cases without validated expectations as pending.
-- [ ] Add and run the new focused test file to establish the expected failures; implement the approved bounded strategy and rerun the file.
-- [ ] Document supported cases, limitations, and any lexical data required; update exports and usage examples only for implemented behavior.
+- [x] Define and approve `segmentSyllables(text: string): string[]` as a bounded word-based lookup, preserving unknown segments; export from root and `./segmentation`.
+- [x] Select reviewable Thai fixtures for two multi-syllable words and cover unknown or ambiguous words, mixed scripts, punctuation, empty strings, and invalid arguments.
+- [x] Add and run the focused test file before and after implementing the approved strategy.
+- [x] Document supported words, sources, limitations, and the process for extending the lexical data.
+
+Phase 6 verification: focused syllable tests and typecheck passed. Build and installed-package verification for the new export were not run; the prior Phase 5 build does not include this change.
 
 ## Phase 7 — P2: Thai digits and number reading
 

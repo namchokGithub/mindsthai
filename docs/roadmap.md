@@ -10,7 +10,7 @@ Unless marked implemented, these are planned capabilities, not available APIs. P
 
 ## P2 — Additional processing
 
-- `segmentSyllables(text, options?)`.
+- `segmentSyllables(text)`: implemented as a limited two-word prototype; see the [README](../README.md#syllable-segmentation-prototype) for coverage and limitations.
 - `toThaiDigits(text)` and `toArabicDigits(text)`.
 - `readThaiNumber(value, options?)`.
 - `analyzeThai(text, options?)`.

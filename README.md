@@ -37,6 +37,27 @@ const sentences = segmentSentences("สวัสดีครับ วันน�
 
 These imports are available after publication and are covered by an installed-package check.
 
+### Syllable segmentation prototype
+
+`segmentSyllables(text: string): string[]` first uses `segmentWords`, then splits only the following whole-word segments at documented written boundaries:
+
+| Word | Segments |
+| --- | --- |
+| มะนาว | มะ · นาว |
+| มะละกอ | มะ · ละ · กอ |
+
+The syllable readings can be reviewed in the Thai Wiktionary entries for [มะนาว](https://th.wiktionary.org/wiki/มะนาว) and [มะละกอ](https://th.wiktionary.org/wiki/มะละกอ). The original characters are preserved; joining the results reconstructs the input. Unknown words and words without a supported written split remain whole word segments. The returned array does not distinguish verified syllables from unchanged segments, and this prototype is not a general Thai syllable segmenter.
+
+Empty input returns `[]`; non-string input throws `TypeError`. Non-empty input requires `Intl.Segmenter`, and word boundaries may vary with runtime locale and ICU data. Extend the table only with independently reviewable written boundaries and focused tests; do not guess ambiguous splits.
+
+```ts
+import { segmentSyllables } from "@mindskit/thai/segmentation";
+
+segmentSyllables("มะนาว"); // ["มะ", "นาว"]
+```
+
+The new export has not yet been checked in a built, installed package.
+
 ## Romanization prototype
 
 `romanize(text: string, options: RomanizationOptions): string` requires `style: "rtgs"` or `style: "casual"`. It is a limited whole-word lookup, not a general RTGS engine. Its complete vocabulary is:
@@ -63,7 +84,7 @@ These imports are available after publication and are covered by an installed-pa
 ## Planned capabilities
 
 - **P1:** NFC normalization, word and sentence segmentation, and a limited romanization prototype are implemented.
-- **P2:** syllable segmentation, Thai digit conversion, number reading, and text analysis.
+- **P2:** a limited syllable segmentation prototype is implemented; Thai digit conversion, number reading, and text analysis are planned.
 - **P3:** spell checking, dictionary lookup, and custom pronunciation or romanization mappings.
 
 See [the roadmap](docs/roadmap.md) and [progress plan](docs/progress.md). General Thai romanization requires linguistic context beyond the prototype's small lookup table.
