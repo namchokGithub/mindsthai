@@ -134,10 +134,12 @@ Phase 11 verification: focused override tests and typecheck passed. Package expo
 
 ## Phase 12 — P2/P3 integration and release readiness
 
-- [ ] Update the README, architecture, roadmap, and this progress file as each approved capability ships; expose only implemented APIs and document all new public subpaths.
-- [ ] Extend focused export and declaration checks for each approved subpath and verify interoperability among segmentation, dictionary, spell checking, and overrides.
-- [ ] Reassess runtime compatibility, package contents, side effects, bundle size, data licenses, and linguistic limitations. Request explicit authorization for any restricted build, full-suite run, or package dry-run.
-- [ ] Record completed and skipped checks, unresolved decisions and limitations, and the next recommended milestone. Publishing, tagging, and pushing remain separate user decisions.
+- [x] Update the README and handoff documentation to reflect the implemented APIs and subpaths.
+- [x] Extend export and declaration checks and test interoperability among segmentation, dictionary, spell checking, and overrides.
+- [x] Reassess runtime compatibility, package contents, side effects, bundle size, data provenance, and linguistic limitations; run the explicitly authorized build, full suite, and package dry-run.
+- [x] Record completed and skipped checks and unresolved limitations in this file and `Context.md`. Publishing, tagging, and pushing remain separate user decisions.
+
+Phase 12 verification on Node.js 26.7.0: `pnpm typecheck`, `pnpm build`, and `pnpm test` passed (11 files, 95 tests), including installed-package and integration checks. `npm pack --dry-run` listed 19 files; the build reported 12.69 kB of output and a TypeScript 7.0 generator deprecation warning. The package is private at version 0.0.1, with no production dependencies and no `sideEffects` flag. CI, Node.js 24, browser compatibility, and a comprehensive third-party license audit were not verified. Built-in lexical data is limited and references are documented. Next: agree on a follow-up scope; no release is authorized.
 
 ## Review focus
 

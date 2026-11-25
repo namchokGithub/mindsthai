@@ -56,7 +56,7 @@ import { segmentSyllables } from "@mindskit/thai/segmentation";
 segmentSyllables("มะนาว"); // ["มะ", "นาว"]
 ```
 
-The new export has not yet been checked in a built, installed package.
+The export is covered by an installed-package check on Node.js 26.
 
 ## Romanization prototype
 
@@ -84,7 +84,7 @@ romanize("แมว", { style: "casual", overrides }); // "meow"
 lookupPronunciation("แมว", { overrides }); // "แมว"
 ```
 
-The `PronunciationOverride` and `PronunciationOptions` types are exported from the root and romanization subpath. The new exports have not yet been checked in a built, installed package.
+The `PronunciationOverride` and `PronunciationOptions` types are exported from the root and romanization subpath. The exports are covered by installed-package checks on Node.js 26.
 
 ```ts
 import { romanize } from "@mindskit/thai";
@@ -109,7 +109,7 @@ toArabicDigits("๑๒๓"); // "123"
 readThaiNumber(21); // "ยี่สิบเอ็ด"
 ```
 
-The functions are also exported from the root. The new exports have not yet been checked in a built, installed package.
+The functions are also exported from the root. The exports are covered by installed-package checks on Node.js 26.
 
 ## Text analysis
 
@@ -128,7 +128,7 @@ const result = analyzeThai("ไทย");
 // { codePointCount: 3, thaiBlockCodePointCount: 3, wordSegments: ["ไทย"], sentenceSegments: ["ไทย"] }
 ```
 
-The function and `ThaiTextAnalysis` type are also exported from the root. The new exports have not yet been checked in a built, installed package.
+The function and `ThaiTextAnalysis` type are also exported from the root. The exports are covered by installed-package checks on Node.js 26.
 
 ## Dictionary prototype
 
@@ -145,7 +145,7 @@ lookupWord("ส้ม", { entries: [{ word: "ส้ม", meaning: "orange" }] })
 
 Each custom entry has non-empty `word` and `meaning` strings. Custom entries apply only to that call and override a matching built-in entry. Duplicate custom words after NFC normalization, invalid entries, or invalid arguments throw `TypeError`. Returned entries are copies; the returned `word` is normalized to NFC. Entries are neither persisted nor fetched from a network. New built-in entries require independently reviewable sources and focused tests.
 
-The function and `DictionaryEntry` and `DictionaryOptions` types are also exported from the root. The new exports have not yet been checked in a built, installed package.
+The function and `DictionaryEntry` and `DictionaryOptions` types are also exported from the root. The exports are covered by installed-package checks on Node.js 26.
 
 ## Spell-checking prototype
 
@@ -160,7 +160,7 @@ checkSpelling("แมว", { entries: [{ word: "แมว", meaning: "cat" }] })
 // [{ word: "แมว", start: 0, end: 3, status: "known" }]
 ```
 
-Custom entries follow the same validation and per-call behavior as `lookupWord`. Empty input returns `[]`; invalid arguments throw `TypeError`. Non-empty input requires `Intl.Segmenter`. The function and `SpellingOptions` and `SpellingResult` types are also exported from the root. The new exports have not yet been checked in a built, installed package.
+Custom entries follow the same validation and per-call behavior as `lookupWord`. Empty input returns `[]`; invalid arguments throw `TypeError`. Non-empty input requires `Intl.Segmenter`. The function and `SpellingOptions` and `SpellingResult` types are also exported from the root. The exports are covered by installed-package checks on Node.js 26.
 
 ## Planned capabilities
 

@@ -41,14 +41,14 @@ describe("installed package", () => {
   it("resolves public JavaScript exports while blocking internal paths", () => {
     const source = `
       import assert from "node:assert/strict";
-      import { analyzeThai, checkSpelling, lookupPronunciation, lookupWord, normalizeThai, romanize, segmentWords, segmentSentences } from "@mindskit/thai";
+      import { analyzeThai, checkSpelling, lookupPronunciation, lookupWord, normalizeThai, readThaiNumber as rootNumber, romanize, segmentWords, segmentSentences, segmentSyllables } from "@mindskit/thai";
       import { analyzeThai as analyze } from "@mindskit/thai/analysis";
       import { lookupWord as lookup } from "@mindskit/thai/dictionary";
       import { checkSpelling as check } from "@mindskit/thai/spell-checking";
       import { normalizeThai as normalize } from "@mindskit/thai/normalization";
       import { toThaiDigits, toArabicDigits, readThaiNumber } from "@mindskit/thai/numbers";
       import { romanize as roman, lookupPronunciation as pronunciation } from "@mindskit/thai/romanization";
-      import { segmentWords as words, segmentSentences as sentences } from "@mindskit/thai/segmentation";
+      import { segmentWords as words, segmentSentences as sentences, segmentSyllables as syllables } from "@mindskit/thai/segmentation";
       assert.equal(normalize("cafe\\u0301"), normalizeThai("cafe\\u0301"));
       assert.deepEqual(analyze("ไทย"), analyzeThai("ไทย"));
       assert.deepEqual(lookup("มะนาว"), lookupWord("มะนาว"));
@@ -56,11 +56,13 @@ describe("installed package", () => {
       assert.equal(toThaiDigits("123"), "๑๒๓");
       assert.equal(toArabicDigits("๑๒๓"), "123");
       assert.equal(readThaiNumber(21), "ยี่สิบเอ็ด");
+      assert.equal(rootNumber(21), readThaiNumber(21));
       assert.equal(roman("สวัสดี", { style: "rtgs" }), romanize("สวัสดี", { style: "rtgs" }));
       const pronunciationOptions = { overrides: [{ word: "แมว", pronunciation: "แมว" }] };
       assert.equal(pronunciation("แมว", pronunciationOptions), lookupPronunciation("แมว", pronunciationOptions));
       assert.deepEqual(words("ภาษาไทย"), segmentWords("ภาษาไทย"));
       assert.deepEqual(sentences("Hello. Next."), segmentSentences("Hello. Next."));
+      assert.deepEqual(syllables("มะนาว"), segmentSyllables("มะนาว"));
       await assert.rejects(import("@mindskit/thai/dist/index.mjs"), { code: "ERR_PACKAGE_PATH_NOT_EXPORTED" });
     `;
     writeFileSync(join(consumer, "consumer.mjs"), source);
@@ -76,7 +78,7 @@ describe("installed package", () => {
       import { normalizeThai as normalize } from "@mindskit/thai/normalization";
       import { toThaiDigits, toArabicDigits, readThaiNumber } from "@mindskit/thai/numbers";
       import { romanize as roman, lookupPronunciation, type RomanizationOptions, type PronunciationOptions, type PronunciationOverride } from "@mindskit/thai/romanization";
-      import { segmentWords as words, segmentSentences as sentences } from "@mindskit/thai/segmentation";
+      import { segmentWords as words, segmentSentences as sentences, segmentSyllables as syllables } from "@mindskit/thai/segmentation";
       const options: RomanizationOptions = { style: "rtgs" };
       const override: PronunciationOverride = { word: "แมว", pronunciation: "แมว" };
       const pronunciationOptions: PronunciationOptions = { overrides: [override] };
@@ -89,7 +91,7 @@ describe("installed package", () => {
       const spellingOptions: SpellingOptions = dictionaryOptions;
       const spellingResults: SpellingResult[] = checkSpelling("มะนาว", spellingOptions);
       void spellingResults;
-      const outputs: string[] = [normalizeThai(""), normalize(""), toThaiDigits(""), toArabicDigits(""), readThaiNumber(0), romanize("", options), roman("", options), ...segmentWords(""), ...segmentSentences(""), ...words(""), ...sentences("")];
+      const outputs: string[] = [normalizeThai(""), normalize(""), toThaiDigits(""), toArabicDigits(""), readThaiNumber(0), romanize("", options), roman("", options), ...segmentWords(""), ...segmentSentences(""), ...words(""), ...sentences(""), ...syllables("")];
       void outputs;
     `;
     writeFileSync(join(consumer, "consumer.ts"), source);
