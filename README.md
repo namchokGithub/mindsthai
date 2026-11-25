@@ -35,13 +35,36 @@ const sentences = segmentSentences("สวัสดีครับ วันน�
 
 These imports are available after publication; built-package imports have not yet been verified.
 
+## Romanization prototype
+
+`romanize(text: string, options: RomanizationOptions): string` requires `style: "rtgs"` or `style: "casual"`. It is a limited whole-word lookup, not a general RTGS engine. Its complete vocabulary is:
+
+| Thai | RTGS | Casual |
+| --- | --- | --- |
+| สวัสดี | sawatdi | sawasdee |
+| ครับ | khrap | krap |
+| ค่ะ | kha | kha |
+
+The RTGS readings can be checked against [this educational document](https://media.bpi.ac.th/admin/attach/w2/f20241017150428_N2cZHPqMNJ.pdf). Casual spellings are informal and do not follow a formal standard. Word boundaries come from `segmentWords`, so matching depends on runtime locale and ICU data. Unknown segments remain unchanged; the lookup cannot resolve contextual ambiguity. No spaces are added between converted segments: `สวัสดีครับ` becomes `sawatdikhrap` in RTGS style. Other scripts, digits, punctuation, and existing whitespace are preserved.
+
+Empty input returns an empty string; invalid text or style throws `TypeError`. Non-empty input requires `Intl.Segmenter`. To extend the vocabulary, add whole-word readings for both styles with independently reviewable sources and focused tests; do not add ambiguous readings without an explicit policy.
+
+```ts
+import { romanize } from "@mindskit/thai";
+// Alternatively: import { romanize } from "@mindskit/thai/romanization";
+
+romanize("สวัสดี ค่ะ", { style: "casual" }); // "sawasdee kha"
+```
+
+These imports are available after publication; built-package imports have not yet been verified.
+
 ## Planned capabilities
 
-- **P1:** NFC normalization and word and sentence segmentation are implemented; limited or deferred romanization is planned.
+- **P1:** NFC normalization, word and sentence segmentation, and a limited romanization prototype are implemented.
 - **P2:** syllable segmentation, Thai digit conversion, number reading, and text analysis.
 - **P3:** spell checking, dictionary lookup, and custom pronunciation or romanization mappings.
 
-See [the roadmap](docs/roadmap.md) and [progress plan](docs/progress.md). Romanization requires linguistic context; a character map alone is not a correct RTGS implementation. Thai word and sentence boundaries also require explicit strategies. Any eventual implementation will document its coverage and limitations.
+See [the roadmap](docs/roadmap.md) and [progress plan](docs/progress.md). General Thai romanization requires linguistic context beyond the prototype's small lookup table.
 
 ## Development
 

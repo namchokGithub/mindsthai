@@ -17,6 +17,10 @@
       "types": "./dist/normalization/index.d.ts",
       "default": "./dist/normalization/index.js"
     },
+    "./romanization": {
+      "types": "./dist/romanization/index.d.ts",
+      "default": "./dist/romanization/index.js"
+    },
     "./segmentation": {
       "types": "./dist/segmentation/index.d.ts",
       "default": "./dist/segmentation/index.js"

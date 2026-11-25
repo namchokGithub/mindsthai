@@ -26,7 +26,7 @@
 - [x] Use Node.js 24 as the minimum and Node.js 26 LTS in CI; use compatible stable tooling.
 - [x] Normalize the entire input to NFC; do not apply additional Thai mark ordering, whitespace changes, or spelling corrections. Return empty input unchanged and throw `TypeError` for non-string input.
 - [x] Return `string[]` using `Intl.Segmenter('th')` with word or sentence granularity, preserving all text. Return `[]` for empty input, throw `TypeError` for non-strings, and report missing `Intl.Segmenter` for non-empty input. Document ICU and locale variability.
-- [ ] Decide whether romanization remains a documented pending milestone or ships as a limited prototype; if implemented, approve its supported vocabulary, unknown-text fallback, and RTGS/casual distinctions using independently verified fixtures.
+- [x] Ship a limited three-word romanization prototype with `rtgs` and `casual` readings; preserve unknown segments and existing spacing, and document the source and limitations.
 - [ ] Before P2, approve syllable segmentation and number-reading behavior, accepted number formats and range, digit conversion rules, and the shape of analysis results.
 - [ ] Before P3, approve dictionary and spell-checking data sources and licensing, custom entry and override formats, ambiguity handling, suggestions, and any effect on package size or runtime resources.
 - [ ] Explicitly authorize any final build, full test run, and package dry-run needed to verify distribution; these conflict with the current local check restrictions unless requested.
@@ -66,10 +66,10 @@ Foundation verification: dependency installation and `pnpm typecheck` succeeded 
 
 ## Phase 4 — Romanization
 
-- [ ] Record the approved decision to defer the algorithm or ship a bounded prototype. A deferred algorithm must not be represented as a functioning API.
-- [ ] If a prototype is approved, define `romanize(text, { style })`, its types, explicit supported inputs and fallback, and root/`./romanization` exports.
-- [ ] Add independently reviewable fixtures for supported readings, both styles, unknown words, punctuation, numerals, empty and invalid input; run the changed test file before implementation.
-- [ ] Implement only behavior supported by the fixtures, rerun the changed test file, and document the limitations and process for extending lexical data. Do not invent readings.
+- [x] Record the approved decision to ship a bounded prototype.
+- [x] Define `romanize(text, { style })`, its types, supported inputs and fallback, and configure root/`./romanization` exports.
+- [x] Add reviewable fixtures for supported readings, both styles, unknown words, punctuation, numerals, empty and invalid input; run the changed test file before implementation.
+- [x] Implement and document the limited lookup and process for extending lexical data. Focused tests and typecheck pass; build and installed-package exports remain unverified under current check restrictions.
 
 ## Phase 5 — Distribution and handoff
 
