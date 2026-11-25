@@ -8,6 +8,8 @@ The distribution contains ESM JavaScript and TypeScript declarations only. Insta
 
 Thai language behavior must be documented and backed by reviewable fixtures. The romanization prototype looks up supported whole-word segments and preserves unknown segments; it is not full RTGS. Segmentation uses `Intl.Segmenter` with word or sentence granularity, retains every segment, and throws for non-empty input if the API is missing. The runtime's locale and ICU data determine boundaries, including any locale fallback. See [the roadmap](roadmap.md) for later capabilities and [the progress plan](progress.md) for open decisions.
 
+Romanization overrides are validated and applied per call using NFC-normalized word segments. Pronunciation lookup returns only a caller-provided value and does not generate romanizations.
+
 Syllable segmentation builds on word segmentation and uses a small table of written splits. It preserves unknown segments without classifying them, so it is not a general-purpose syllable analyzer.
 
 The numbers module converts ASCII and Thai digits without changing other text and reads Thai cardinal integers within a documented range. It is exposed through the root and `./numbers`.

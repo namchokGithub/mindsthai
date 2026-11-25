@@ -19,6 +19,6 @@ Unless marked implemented, these are planned capabilities, not available APIs. P
 
 - `checkSpelling(text, options?)`: implemented as a limited dictionary membership prototype without suggestions; see the [README](../README.md#spell-checking-prototype).
 - `lookupWord(word, options?)`: implemented as a limited dictionary prototype with per-call custom entries; see the [README](../README.md#dictionary-prototype).
-- Custom romanization and pronunciation mappings.
+- Per-call romanization overrides and `lookupPronunciation(word, { overrides })`: implemented; see the [README](../README.md#romanization-prototype).
 
 See [progress.md](progress.md) for implementation steps, decisions, and verification constraints.

@@ -72,6 +72,20 @@ The RTGS readings can be checked against [this educational document](https://med
 
 Empty input returns an empty string; invalid text or style throws `TypeError`. Non-empty input requires `Intl.Segmenter`. To extend the vocabulary, add whole-word readings for both styles with independently reviewable sources and focused tests; do not add ambiguous readings without an explicit policy.
 
+Optional per-call overrides take precedence over built-in readings for the selected style. Matching uses complete word segments after NFC normalization. If an override omits the selected style, the built-in reading or original segment is used. Each override requires a non-empty `word` and at least one non-empty `rtgs`, `casual`, or `pronunciation` string; duplicate words after NFC and invalid fields throw `TypeError`, including for empty input.
+
+`lookupPronunciation(word, { overrides })` returns only an explicitly supplied `pronunciation` for the NFC-normalized whole query, or `undefined` when absent. It does not infer readings or use pronunciation text to generate romanization. Overrides exist only for the current call and do not modify the dictionary.
+
+```ts
+import { romanize, lookupPronunciation } from "@mindskit/thai/romanization";
+
+const overrides = [{ word: "แมว", casual: "meow", pronunciation: "แมว" }];
+romanize("แมว", { style: "casual", overrides }); // "meow"
+lookupPronunciation("แมว", { overrides }); // "แมว"
+```
+
+The `PronunciationOverride` and `PronunciationOptions` types are exported from the root and romanization subpath. The new exports have not yet been checked in a built, installed package.
+
 ```ts
 import { romanize } from "@mindskit/thai";
 // Alternatively: import { romanize } from "@mindskit/thai/romanization";
@@ -152,7 +166,7 @@ Custom entries follow the same validation and per-call behavior as `lookupWord`.
 
 - **P1:** NFC normalization, word and sentence segmentation, and a limited romanization prototype are implemented.
 - **P2:** a limited syllable segmentation prototype, Thai digit conversion, number reading, and text analysis are implemented.
-- **P3:** limited dictionary and spell-checking prototypes are implemented; custom pronunciation or romanization mappings are planned.
+- **P3:** limited dictionary and spell-checking prototypes and per-call pronunciation and romanization overrides are implemented.
 
 See [the roadmap](docs/roadmap.md) and [progress plan](docs/progress.md). General Thai romanization requires linguistic context beyond the prototype's small lookup table.
 

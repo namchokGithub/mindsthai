@@ -126,9 +126,11 @@ Phase 10 verification: focused spell-checking tests and typecheck passed. Packag
 
 ## Phase 11 — P3: Romanization and pronunciation overrides
 
-- [ ] Define and approve custom mapping APIs and data format, precedence over built-in readings, matching boundaries, ambiguity behavior, and interaction with RTGS and casual styles.
-- [ ] Add focused tests for matching and nonmatching entries, conflicting mappings, mixed text, punctuation, empty and invalid inputs, and deterministic precedence; run the new test file before and after implementation.
-- [ ] Implement only the approved override behavior and document examples, limitations, and how callers manage their mappings.
+- [x] Approve per-call overrides for style-specific romanization and explicit pronunciation lookup, with NFC matching and defined fallback behavior.
+- [x] Add focused tests for matching and nonmatching entries, conflicting mappings, mixed text, punctuation, empty and invalid inputs, and precedence; run the new test file before and after implementation.
+- [x] Implement the approved override behavior and document examples, limitations, and per-call data management.
+
+Phase 11 verification: focused override tests and typecheck passed. Package export checks were extended but require a new build and were not run; the existing build does not contain the new exports.
 
 ## Phase 12 — P2/P3 integration and release readiness
 
