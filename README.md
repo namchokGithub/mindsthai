@@ -116,11 +116,28 @@ const result = analyzeThai("ไทย");
 
 The function and `ThaiTextAnalysis` type are also exported from the root. The new exports have not yet been checked in a built, installed package.
 
+## Dictionary prototype
+
+`lookupWord(word: string, options?: DictionaryOptions): DictionaryEntry | undefined` performs an exact lookup after NFC normalization. It does not trim or segment the query. Unknown and empty queries return `undefined`.
+
+The complete built-in vocabulary is `มะนาว` → `lime` and `มะละกอ` → `papaya`. These short labels were authored for this project and are distributed under its MIT license; factual references include the Thai government's [lime standard](https://lib1.dss.go.th/bsti/index.php/en/registration-form/4165-2020-05-05-09-01-19) and [papaya plant information](https://doaplant.doa.go.th/GardFront/GardGenInfoDetail/77). This is a prototype, not a comprehensive dictionary.
+
+```ts
+import { lookupWord } from "@mindskit/thai/dictionary";
+
+lookupWord("มะนาว"); // { word: "มะนาว", meaning: "lime" }
+lookupWord("ส้ม", { entries: [{ word: "ส้ม", meaning: "orange" }] });
+```
+
+Each custom entry has non-empty `word` and `meaning` strings. Custom entries apply only to that call and override a matching built-in entry. Duplicate custom words after NFC normalization, invalid entries, or invalid arguments throw `TypeError`. Returned entries are copies; the returned `word` is normalized to NFC. Entries are neither persisted nor fetched from a network. New built-in entries require independently reviewable sources and focused tests.
+
+The function and `DictionaryEntry` and `DictionaryOptions` types are also exported from the root. The new exports have not yet been checked in a built, installed package.
+
 ## Planned capabilities
 
 - **P1:** NFC normalization, word and sentence segmentation, and a limited romanization prototype are implemented.
 - **P2:** a limited syllable segmentation prototype, Thai digit conversion, number reading, and text analysis are implemented.
-- **P3:** spell checking, dictionary lookup, and custom pronunciation or romanization mappings.
+- **P3:** a limited dictionary prototype is implemented; spell checking and custom pronunciation or romanization mappings are planned.
 
 See [the roadmap](docs/roadmap.md) and [progress plan](docs/progress.md). General Thai romanization requires linguistic context beyond the prototype's small lookup table.
 

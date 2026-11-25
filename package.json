@@ -21,6 +21,10 @@
       "types": "./dist/analysis/index.d.mts",
       "default": "./dist/analysis/index.mjs"
     },
+    "./dictionary": {
+      "types": "./dist/dictionary/index.d.mts",
+      "default": "./dist/dictionary/index.mjs"
+    },
     "./normalization": {
       "types": "./dist/normalization/index.d.mts",
       "default": "./dist/normalization/index.mjs"

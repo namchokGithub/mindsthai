@@ -18,7 +18,7 @@ Unless marked implemented, these are planned capabilities, not available APIs. P
 ## P3 — Language resources
 
 - `checkSpelling(text, options?)`.
-- Dictionary lookup and custom entries.
+- `lookupWord(word, options?)`: implemented as a limited dictionary prototype with per-call custom entries; see the [README](../README.md#dictionary-prototype).
 - Custom romanization and pronunciation mappings.
 
 See [progress.md](progress.md) for implementation steps, decisions, and verification constraints.

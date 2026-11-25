@@ -13,3 +13,5 @@ Syllable segmentation builds on word segmentation and uses a small table of writ
 The numbers module converts ASCII and Thai digits without changing other text and reads Thai cardinal integers within a documented range. It is exposed through the root and `./numbers`.
 
 The analysis module counts Unicode and Thai-block code points and reuses word and sentence segmentation, inheriting their runtime and linguistic limitations.
+
+The dictionary prototype uses a small locally authored table and per-call custom entries. It matches NFC-normalized whole queries and does not persist entries or perform network requests.

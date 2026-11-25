@@ -109,10 +109,12 @@ Phase 8 verification: focused analysis tests and typecheck passed. Package expor
 
 ## Phase 9 — P3: Dictionary
 
-- [ ] Define and approve lookup and custom-entry APIs, entry schema, matching and normalization rules, duplicate handling, and unknown-entry results.
-- [ ] Select independently reviewable, legally usable lexical data and approve its size, packaging, provenance, and update process. Do not fetch data at runtime.
-- [ ] Add focused tests for known and unknown entries, custom entries, duplicates, mixed text, empty and invalid inputs, and deterministic results; run the new test file before and after implementation.
-- [ ] Document data provenance, licensing, limitations, extension instructions, and implemented exports.
+- [x] Approve exact NFC-normalized `lookupWord` and per-call custom entry APIs, duplicate handling, and unknown-entry results.
+- [x] Use two short, locally authored MIT-licensed entries with documented factual references; no runtime data fetching.
+- [x] Add focused tests for known and unknown entries, custom entries, duplicates, mixed text, empty and invalid inputs, and result isolation; run the new test file before and after implementation.
+- [x] Document data provenance, licensing, limitations, extension instructions, and configured exports.
+
+Phase 9 verification: focused dictionary tests and typecheck passed. Package export checks were extended but require a new build and were not run; the existing build does not contain the new exports.
 
 ## Phase 10 — P3: Spell checking
 
