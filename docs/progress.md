@@ -25,7 +25,7 @@
 - [x] Proceed in stages: foundation first; later phases require separate approval.
 - [x] Use Node.js 24 as the minimum and Node.js 26 LTS in CI; use compatible stable tooling.
 - [x] Normalize the entire input to NFC; do not apply additional Thai mark ordering, whitespace changes, or spelling corrections. Return empty input unchanged and throw `TypeError` for non-string input.
-- [ ] Choose segmentation return types and treatment of whitespace and punctuation; decide what happens when `Intl.Segmenter` is unavailable and document ICU variability. Define a separate sentence strategy.
+- [x] Return `string[]` using `Intl.Segmenter('th')` with word or sentence granularity, preserving all text. Return `[]` for empty input, throw `TypeError` for non-strings, and report missing `Intl.Segmenter` for non-empty input. Document ICU and locale variability.
 - [ ] Decide whether romanization remains a documented pending milestone or ships as a limited prototype; if implemented, approve its supported vocabulary, unknown-text fallback, and RTGS/casual distinctions using independently verified fixtures.
 - [ ] Before P2, approve syllable segmentation and number-reading behavior, accepted number formats and range, digit conversion rules, and the shape of analysis results.
 - [ ] Before P3, approve dictionary and spell-checking data sources and licensing, custom entry and override formats, ambiguity handling, suggestions, and any effect on package size or runtime resources.
@@ -60,9 +60,9 @@ Foundation verification: dependency installation and `pnpm typecheck` succeeded 
 
 ## Phase 3 — Segmentation
 
-- [ ] After strategy approval, define options and return types for `segmentWords` and `segmentSentences`; export them from the root and `./segmentation`.
-- [ ] Add focused tests for Thai, mixed scripts and digits, punctuation, whitespace, empty and invalid inputs, sentence boundaries, and unavailable `Intl.Segmenter`; run the changed test file before implementation.
-- [ ] Implement the approved strategies and fallback; rerun the changed test file. Document runtime support and any differences caused by ICU.
+- [x] Define `segmentWords(text: string): string[]` and `segmentSentences(text: string): string[]` without options; configure root and `./segmentation` exports.
+- [x] Add focused tests for Thai, mixed scripts and digits, punctuation, whitespace, empty and invalid inputs, sentence boundaries, and unavailable `Intl.Segmenter`; run the changed test file before implementation.
+- [x] Implement the approved strategies and missing-API error; document ICU and locale limitations. Focused tests and typecheck pass; build and installed-package exports remain unverified under current check restrictions.
 
 ## Phase 4 — Romanization
 

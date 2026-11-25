@@ -16,6 +16,10 @@
     "./normalization": {
       "types": "./dist/normalization/index.d.ts",
       "default": "./dist/normalization/index.js"
+    },
+    "./segmentation": {
+      "types": "./dist/segmentation/index.d.ts",
+      "default": "./dist/segmentation/index.js"
     }
   },
   "scripts": {

@@ -19,9 +19,25 @@ normalizeThai("สวัสดี cafe\u0301"); // "สวัสดี café"
 
 Package builds and installed imports have not yet been verified.
 
+## Segmentation
+
+`segmentWords(text: string): string[]` uses `Intl.Segmenter` with the Thai locale and word granularity; `segmentSentences(text: string): string[]` uses sentence granularity. Both preserve all input characters, including punctuation and whitespace, so joining the returned segments reconstructs the input. Empty input returns `[]`; non-string input throws `TypeError`.
+
+For non-empty input, both functions require `Intl.Segmenter` and throw an error if it is unavailable. Results depend on the runtime's locale and ICU data and can vary across environments; Thai locale support is not independently checked. Sentence segmentation does not treat every space as a sentence boundary and may not identify every Thai sentence.
+
+```ts
+import { segmentWords, segmentSentences } from "@mindskit/thai";
+// Alternatively: import from "@mindskit/thai/segmentation".
+
+const words = segmentWords("ฉันชอบเขียนโปรแกรม");
+const sentences = segmentSentences("สวัสดีครับ วันนี้อากาศดี");
+```
+
+These imports are available after publication; built-package imports have not yet been verified.
+
 ## Planned capabilities
 
-- **P1:** NFC normalization is implemented; word and sentence segmentation and limited or deferred romanization are planned.
+- **P1:** NFC normalization and word and sentence segmentation are implemented; limited or deferred romanization is planned.
 - **P2:** syllable segmentation, Thai digit conversion, number reading, and text analysis.
 - **P3:** spell checking, dictionary lookup, and custom pronunciation or romanization mappings.
 
